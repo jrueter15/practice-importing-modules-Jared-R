@@ -1,20 +1,17 @@
 const path = require("node:path");
 const tm = require("./taskManager");
-const { saveTasks, loadTasks } = require("./fileHandler");
+const fh = require("./fileHandler");
 
 // Build file path
 const filePath = path.join(__dirname, "tasks.json");
 
 // Load tasks from tasks.json
-const tasksArray = loadTasks(filePath);
+const tasks = fh.loadTasks(filePath);
 
-// tm.addTask(tasksArray, 'mow the lawn');
-// tm.addTask(tasksArray, 'clean the house');
-// tm.addTask(tasksArray, 'move to Ireland');
+tm.addTask(tasks, "mow the lawn");
+tm.addTask(tasks, "clean the house");
+tm.addTask(tasks, "move to Ireland");
 
-tm.listTasks(tasksArray);
+tm.listTasks(tasks);
 
-saveTasks(filePath, tasksArray);
-
-// Adding more tasks. Comment out the addTasks you've already done.
-tm.addTask(tasksArray, "mow the lawn");
+fh.saveTasks(filePath, tasks);
